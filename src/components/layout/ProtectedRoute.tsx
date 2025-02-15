@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }: TProtectedRoute) => {
   const token = useAppSelector(useCurrentToken);
 
   if (!token) {
-    return <Navigate to="/login" replace={true} />;
+    return <Navigate to="/" replace={true} />;
   }
 
   return children;

@@ -30,9 +30,11 @@ const Navbar = () => {
               </svg>
             </div>
           </div>
-          <div>
-            <h1 className="text-[25px] font-bold">Bicycle Store</h1>
-          </div>
+          <Link to="/">
+            <div>
+              <h1 className="text-[25px] font-bold">Bicycle Store</h1>
+            </div>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -50,9 +52,20 @@ const Navbar = () => {
               <Button onClick={handleLogout}>Logout</Button>
             </div>
           ) : (
-            <Link to="/login">
-              <Button>Login</Button>
-            </Link>
+            <>
+              <div className="flex">
+                <div className="mr-3">
+                  <Link to="/register">
+                    <Button>Register</Button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/login">
+                    <Button>Login</Button>
+                  </Link>
+                </div>
+              </div>
+            </>
           )}
         </div>
       </div>

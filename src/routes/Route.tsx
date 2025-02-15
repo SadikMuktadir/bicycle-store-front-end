@@ -4,9 +4,10 @@ import { routeGenerator } from "@/utils/routesGenerator";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
-import Login from "@/components/pages/Login";
 import AllProducts from "@/components/pages/public/AllProducts";
 import ContactUs from "@/components/pages/public/ContactUs";
+import Login from "@/components/pages/public/Login";
+import Register from "@/components/pages/public/Register";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/allProducts",

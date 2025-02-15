@@ -1,13 +1,13 @@
 import { Button, Row } from "antd";
 import { FieldValues } from "react-hook-form";
-import FormData from "../form/FormData";
-import InputData from "../form/InputData";
 import { useLoginMutation } from "@/redux/feacures/auth/authApi";
 import { useAppDispatch } from "@/redux/hook";
 import { toast } from "sonner";
-import { verifyToken } from "../utils/verifyToken";
 import { setUser, TUser } from "@/redux/feacures/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { verifyToken } from "@/components/utils/verifyToken";
+import FormData from "@/components/form/FormData";
+import InputData from "@/components/form/InputData";
 const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
