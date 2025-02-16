@@ -8,11 +8,16 @@ import AllProducts from "@/components/pages/public/AllProducts";
 import ContactUs from "@/components/pages/public/ContactUs";
 import Login from "@/components/pages/public/Login";
 import Register from "@/components/pages/public/Register";
+import Home from "@/components/home/Home";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/login",
         element: <Login />,
@@ -53,7 +58,7 @@ const router = createBrowserRouter([
 
 const Route = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <RouterProvider router={router} />
     </div>
   );
