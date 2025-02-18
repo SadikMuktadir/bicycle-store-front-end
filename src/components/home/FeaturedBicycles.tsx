@@ -1,33 +1,39 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetBycleQuery } from "@/redux/feacures/public/getBycleApi";
-import { Button, Card, Col, Row } from "antd";
+import { Button, Card } from "antd";
 import { Link } from "react-router-dom";
+import { useGetBicycleQuery } from "@/redux/feacures/public/getBycleApi";
+
 const FeaturedBicycles = () => {
-  const { data } = useGetBycleQuery(undefined);
+  const { data } = useGetBicycleQuery(undefined);
+
   return (
-    <div className="">
-      <div>
-        <h1 className="text-center text-[35px]">Featured Bicycles</h1>
+    <div className="my-12 px-4 lg:px-16">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-800">Featured Bicycles</h1>
       </div>
-      <div className="grid grid-cols-3 gap-4">
-        {data?.data?.map((item: any) => (
-          <Row key={item?._id} gutter={16}>
-            <Col span={50}>
-              <Card title={item?.name} hoverable variant="borderless">
-                <p>{item?.brand}</p>
-                <p>{item?.price}</p>
-                <p>{item?.type}</p>
-                <p>{item?.description}</p>
-                <p>{item?.quantity}</p>
-                <p>{item?.true}</p>
-              </Card>
-            </Col>
-          </Row>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {data?.data?.slice(0, 6).map((item: any) => (
+          <Card
+            key={item?._id}
+            title={item?.name}
+            hoverable
+            className="shadow-lg rounded-lg border border-gray-200"
+          >
+            <p className="text-gray-700 font-semibold">Brand: {item?.brand}</p>
+            <p className="text-gray-600">Price: ${item?.price}</p>
+            <p className="text-gray-600">Type: {item?.type}</p>
+            <p className="text-gray-500 text-sm">{item?.description}</p>
+            <p className="text-gray-600">Quantity: {item?.quantity}</p>
+          </Card>
         ))}
       </div>
-      <div className="flex justify-center">
+
+      <div className="flex justify-center mt-10">
         <Link to="/allProducts">
-          <Button>View All</Button>
+          <Button type="primary" size="large" className="px-6 py-2 rounded-md">
+            View All
+          </Button>
         </Link>
       </div>
     </div>

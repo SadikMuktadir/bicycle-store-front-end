@@ -9,6 +9,9 @@ import ContactUs from "@/components/pages/public/ContactUs";
 import Login from "@/components/pages/public/Login";
 import Register from "@/components/pages/public/Register";
 import Home from "@/components/home/Home";
+import ProductDetails from "@/components/home/ProductDetails";
+import CheckOut from "@/components/home/CheckOut";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +36,15 @@ const router = createBrowserRouter([
       {
         path: "/contactUs",
         element: <ContactUs />,
+      },
+
+      {
+        path: "/product-details/:id",
+        element: <ProductDetails />,
+      },
+      {
+        path: "/checkout/:id",
+        element: <CheckOut />,
       },
     ],
   },
