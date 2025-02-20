@@ -1,0 +1,9 @@
+/* styles.css */
+.ant-slider-track {
+  background-color: black; /* Change track color to black */
+}
+
+.ant-slider-handle {
+  border-color: black; /* Change handle border color to black */
+  background-color: black; /* Change handle background color to black */
+}

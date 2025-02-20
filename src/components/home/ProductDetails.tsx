@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Spin, Button } from "antd";
+import { Spin } from "antd";
 import { useGetBicycleByIdQuery } from "@/redux/feacures/public/getBycleApi";
 
 const ProductDetails = () => {
@@ -33,26 +33,69 @@ const ProductDetails = () => {
   }
 
   // Destructure product details from the data
-  const { name, brand, price, type, model, description, quantity } = data.data;
-
+  const { name, brand, price, type, description, quantity, imageUrl } =
+    data.data;
   return (
-    <div className="my-12 px-4 lg:px-16">
-      <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">
-        Product Details
-      </h1>
-      <div
-        className="hero min-h-screen"
-        style={{
-          backgroundImage:
-            "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
-        }}
-      >
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-neutral-content text-center">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">{name}</h1>
-            <p className="mb-5">{description}</p>
-            <Button className="btn btn-primary">Add to Cart</Button>
+    <div className=" py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row -mx-4">
+          <div className="md:flex-1 px-4">
+            <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+              <img
+                className="w-full h-full object-cover"
+                src={imageUrl}
+                alt="Product Image"
+              ></img>
+            </div>
+            <div className="flex -mx-2 mb-4">
+              <div className="w-full px-2">
+                <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="md:flex-1 px-4">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+              {name}
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+              {description}
+            </p>
+            <div className="flex flex-col mb-4">
+              <div className="mr-4">
+                <span className="font-bold text-gray-700 dark:text-gray-300">
+                  Price:
+                </span>
+                <span className="ml-2 text-gray-600 dark:text-gray-300">
+                  ${price}
+                </span>
+              </div>
+              <div className="mr-4">
+                <span className="font-bold text-gray-700 dark:text-gray-300">
+                  Type:
+                </span>
+                <span className="ml-2 text-gray-600 dark:text-gray-300">
+                  {type}
+                </span>
+              </div>
+              <div className="mr-4">
+                <span className="font-bold text-gray-700 dark:text-gray-300">
+                  Brand:
+                </span>
+                <span className="ml-2 text-gray-600 dark:text-gray-300">
+                  {brand}
+                </span>
+              </div>
+              <div className="mr-4">
+                <span className="font-bold text-gray-700 dark:text-gray-300">
+                  Quantity:
+                </span>
+                <span className="ml-2 text-gray-600 dark:text-gray-300">
+                  {quantity}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

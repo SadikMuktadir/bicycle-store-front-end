@@ -4,7 +4,6 @@ import { Col, Input, Row, Spin, Select, Slider, Checkbox, Card } from "antd";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-
 const { Option } = Select;
 
 const AllProducts = () => {
@@ -109,8 +108,7 @@ const AllProducts = () => {
                     Brand: {item?.brand}
                   </p>
                   <p className="text-gray-600">Price: ${item?.price}</p>
-                  <p className="text-gray-600">Category: {item?.category}</p>
-                  <p className="text-gray-600">Model: {item?.model}</p>
+                  <p className="text-gray-600">Category: {item?.type}</p>
                   <p className="text-gray-500 text-sm flex-grow">
                     {item?.description.length > 100
                       ? `${item?.description.slice(0, 100)}...`
@@ -121,7 +119,10 @@ const AllProducts = () => {
                       item?.quantity > 0 ? "text-green-500" : "text-red-500"
                     }`}
                   >
-                    {item?.quantity > 0 ? "In Stock" : "Out of Stock"}
+                    <div>{item?.quantity}</div>
+                    <div>
+                      {item?.quantity > 0 ? "In Stock" : "Out of Stock"}
+                    </div>
                   </p>
                 </div>
 
