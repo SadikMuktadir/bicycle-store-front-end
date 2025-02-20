@@ -32,7 +32,7 @@ const Navbar = () => {
           </div>
           <Link to="/">
             <div>
-              <h1 className="text-[25px] font-bold">Bicycle Store</h1>
+              <h1 className="text-[25px] font-bold">RideSphere</h1>
             </div>
           </Link>
         </div>

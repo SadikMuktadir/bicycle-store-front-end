@@ -1,4 +1,4 @@
-// import Banner from "./Banner";
+import Banner from "./Banner";
 
 import FeaturedBicycles from "./FeaturedBicycles";
 import Footer from "./Footer";
@@ -7,7 +7,7 @@ import Testimonials from "./Testimonials";
 const Home = () => {
   return (
     <div>
-      {/* <Banner></Banner> */}
+      <Banner></Banner>
       <FeaturedBicycles></FeaturedBicycles>
       <Testimonials></Testimonials>
       <Footer></Footer>

@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Card } from "antd";
+import { Card } from "antd";
 import { Link } from "react-router-dom";
 import { useGetBicycleQuery } from "@/redux/feacures/public/getBycleApi";
+import { Button } from "../ui/button";
 
 const FeaturedBicycles = () => {
   const { data } = useGetBicycleQuery(undefined);
@@ -31,9 +32,7 @@ const FeaturedBicycles = () => {
 
       <div className="flex justify-center mt-10">
         <Link to="/allProducts">
-          <Button type="primary" size="large" className="px-6 py-2 rounded-md">
-            View All
-          </Button>
+          <Button className="px-6 py-2 rounded-md">View All</Button>
         </Link>
       </div>
     </div>

@@ -1,18 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetBicycleQuery } from "@/redux/feacures/public/getBycleApi";
-import {
-  Card,
-  Col,
-  Input,
-  Row,
-  Spin,
-  Select,
-  Slider,
-  Checkbox,
-  Button,
-} from "antd";
+import { Col, Input, Row, Spin, Select, Slider, Checkbox, Card } from "antd";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const { Option } = Select;
 
@@ -20,8 +11,6 @@ const AllProducts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [availability, setAvailability] = useState<boolean | null>(null);
 
   const { data, isLoading } = useGetBicycleQuery(searchTerm);
@@ -34,22 +23,11 @@ const AllProducts = () => {
     const matchesPrice =
       item?.price >= priceRange[0] && item?.price <= priceRange[1];
 
-    const matchesBrand = selectedBrand ? item?.brand === selectedBrand : true;
-    const matchesCategory = selectedCategory
-      ? item?.category === selectedCategory
-      : true;
-    const matchesModel = selectedModel ? item?.model === selectedModel : true;
+    const matchesBrand = selectedBrand ? item?.type === selectedBrand : true;
     const matchesAvailability =
       availability !== null ? item?.quantity > 0 === availability : true;
 
-    return (
-      matchesSearch &&
-      matchesPrice &&
-      matchesBrand &&
-      matchesCategory &&
-      matchesModel &&
-      matchesAvailability
-    );
+    return matchesSearch && matchesPrice && matchesBrand && matchesAvailability;
   });
 
   return (
@@ -57,7 +35,7 @@ const AllProducts = () => {
       <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">
         All Products
       </h1>
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-start mb-6">
         <Input
           placeholder="Search by name or brand..."
           value={searchTerm}
@@ -90,40 +68,12 @@ const AllProducts = () => {
             className="w-full"
             onChange={setSelectedBrand}
           >
-            <Option value="SpeedX">SpeedX</Option>
-            <Option value="TrailBlaze">TrailBlaze</Option>
-            <Option value="UrbanMove">UrbanMove</Option>
-          </Select>
-        </div>
-
-        <div>
-          <p className="text-gray-700 font-semibold mb-2">Category</p>
-          <Select
-            placeholder="Select Category"
-            allowClear
-            className="w-full"
-            onChange={setSelectedCategory}
-          >
             <Option value="Mountain">Mountain</Option>
             <Option value="Road">Road</Option>
             <Option value="Hybrid">Hybrid</Option>
+            <Option value="BMX">BMX</Option>
           </Select>
         </div>
-
-        <div>
-          <p className="text-gray-700 font-semibold mb-2">Model</p>
-          <Select
-            placeholder="Select Model"
-            allowClear
-            className="w-full"
-            onChange={setSelectedModel}
-          >
-            <Option value="ModelX">Model X</Option>
-            <Option value="ModelY">Model Y</Option>
-            <Option value="ModelZ">Model Z</Option>
-          </Select>
-        </div>
-
         <div className="flex items-center mt-4">
           <Checkbox
             checked={availability === true}
@@ -139,34 +89,48 @@ const AllProducts = () => {
           <Spin size="large" />
         </div>
       ) : (
-        <Row gutter={[24, 24]} className="justify-center">
+        <Row gutter={[24, 24]} className="justify-start">
           {filteredProducts?.map((item: any) => (
-            <Col key={item?._id} xs={24} sm={12} md={8} lg={6}>
+            <Col key={item?._id} xs={24} sm={12} md={8} lg={8}>
               <Card
                 title={item?.name}
                 hoverable
-                className="shadow-lg rounded-lg border border-gray-200"
+                className="shadow-lg rounded-lg border border-gray-200 flex flex-col h-full"
+                cover={
+                  <img
+                    src={item?.imageUrl}
+                    alt={item?.name}
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                }
               >
-                <p className="text-gray-700 font-semibold">
-                  Brand: {item?.brand}
-                </p>
-                <p className="text-gray-600">Price: ${item?.price}</p>
-                <p className="text-gray-600">Category: {item?.category}</p>
-                <p className="text-gray-600">Model: {item?.model}</p>
-                <p className="text-gray-500 text-sm">{item?.description}</p>
-                <p
-                  className={`text-gray-600 ${
-                    item?.quantity > 0 ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  {item?.quantity > 0 ? "In Stock" : "Out of Stock"}
-                </p>
+                <div className="flex flex-col flex-grow">
+                  <p className="text-gray-700 font-semibold">
+                    Brand: {item?.brand}
+                  </p>
+                  <p className="text-gray-600">Price: ${item?.price}</p>
+                  <p className="text-gray-600">Category: {item?.category}</p>
+                  <p className="text-gray-600">Model: {item?.model}</p>
+                  <p className="text-gray-500 text-sm flex-grow">
+                    {item?.description.length > 100
+                      ? `${item?.description.slice(0, 100)}...`
+                      : item?.description}
+                  </p>
+                  <p
+                    className={`text-gray-600 ${
+                      item?.quantity > 0 ? "text-green-500" : "text-red-500"
+                    }`}
+                  >
+                    {item?.quantity > 0 ? "In Stock" : "Out of Stock"}
+                  </p>
+                </div>
 
-                <Link to={`/product-details/${item?._id}`}>
-                  <Button type="primary" className="w-full mt-4">
-                    View Details
-                  </Button>
-                </Link>
+                {/* Ensures the button is always at the bottom */}
+                <div className="mt-auto pt-4">
+                  <Link to={`/product-details/${item?._id}`}>
+                    <Button className="w-full">View Details</Button>
+                  </Link>
+                </div>
               </Card>
             </Col>
           ))}
