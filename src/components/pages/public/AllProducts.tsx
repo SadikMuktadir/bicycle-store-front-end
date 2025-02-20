@@ -31,7 +31,7 @@ const AllProducts = () => {
 
   return (
     <div className="my-12 px-4 lg:px-16">
-      <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">
+      <h1 className="text-3xl font-medium title-font text-gray-900 mb-12 text-center">
         All Products
       </h1>
       <div className="flex justify-start mb-6">
