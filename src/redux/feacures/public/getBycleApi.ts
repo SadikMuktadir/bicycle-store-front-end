@@ -36,5 +36,5 @@ const getBicycleApi = baseApi.injectEndpoints({
     }),
   }),
 });
-
+// update route products/bicycle_id
 export const { useGetBicycleQuery, useGetBicycleByIdQuery } = getBicycleApi;
