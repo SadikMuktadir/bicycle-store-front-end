@@ -5,11 +5,6 @@ import { useGetBicycleByIdQuery } from "@/redux/feacures/public/getBycleApi";
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, error } = useGetBicycleByIdQuery(id);
-
-  // Debugging the API response
-  console.log("Fetched Product Data:", data);
-
-  // Loading state
   if (isLoading) {
     return (
       <div className="flex justify-center my-16">
@@ -17,8 +12,6 @@ const ProductDetails = () => {
       </div>
     );
   }
-
-  // Error state
   if (error) {
     return (
       <p className="text-red-500 text-center">
@@ -27,12 +20,10 @@ const ProductDetails = () => {
     );
   }
 
-  // Ensure data exists before rendering
   if (!data || !data.data) {
     return <p className="text-gray-500 text-center">Product not found.</p>;
   }
 
-  // Destructure product details from the data
   const { name, brand, price, type, description, quantity, imageUrl } =
     data.data;
   return (

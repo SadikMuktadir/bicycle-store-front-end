@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { logout, useCurrentToken } from "@/redux/feacures/auth/authSlice";
+import Cart from "../pages/public/Cart";
+
 const Navbar = () => {
   const token = useAppSelector(useCurrentToken);
   const dispatch = useAppDispatch();
@@ -51,8 +53,13 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {token ? (
-            <div>
-              <Button onClick={handleLogout}>Logout</Button>
+            <div className="flex">
+              <div className="mr-5 my-auto">
+                <Cart></Cart>
+              </div>
+              <div>
+                <Button onClick={handleLogout}>Logout</Button>
+              </div>
             </div>
           ) : (
             <>
