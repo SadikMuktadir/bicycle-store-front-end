@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Spin } from "antd";
+import { Spin, message } from "antd";
 import { useDispatch } from "react-redux";
 import { useGetBicycleByIdQuery } from "@/redux/feacures/public/getBycleApi";
 import { addToCart } from "@/redux/feacures/cart/cartSlice";
@@ -34,18 +34,22 @@ const ProductDetails = () => {
     data.data;
 
   const handleCart = () => {
-    dispatch(
-      addToCart({
-        _id,
-        name,
-        brand,
-        price,
-        type,
-        description,
-        imageUrl,
-        count: 1,
-      })
-    );
+    if (quantity > 0) {
+      dispatch(
+        addToCart({
+          _id,
+          name,
+          brand,
+          price,
+          type,
+          description,
+          imageUrl,
+          count: 1,
+        })
+      );
+    } else {
+      message.warning("Out of stock");
+    }
   };
 
   return (
@@ -64,7 +68,12 @@ const ProductDetails = () => {
               <div className="w-full px-2">
                 <button
                   onClick={handleCart}
-                  className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
+                  className={`w-full py-2 px-4 rounded-full font-bold ${
+                    quantity > 0
+                      ? "bg-gray-900 dark:bg-gray-600 text-white hover:bg-gray-800 dark:hover:bg-gray-700"
+                      : "bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed"
+                  }`}
+                  disabled={quantity <= 0}
                 >
                   Add to Cart
                 </button>

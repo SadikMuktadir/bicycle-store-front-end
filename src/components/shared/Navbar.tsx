@@ -33,8 +33,13 @@ const Navbar = () => {
             </div>
           </div>
           <Link to="/">
-            <div>
-              <h1 className="text-[25px] font-bold">RideSphere</h1>
+            <div className="flex">
+              <div className="mr-3 h-[40px] w-[40px]">
+                <img src="https://i.ibb.co.com/ZzBftDwL/M.png" alt="" />
+              </div>
+              <div>
+                <h1 className="text-[25px] font-bold">RideSphere</h1>
+              </div>
             </div>
           </Link>
         </div>
